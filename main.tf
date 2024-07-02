@@ -152,7 +152,7 @@ resource "azurerm_linux_virtual_machine" "myVM" {
     public_key = azapi_resource_action.ssh_public_key_gen.output.publicKey
   }
 
-  depends_on = [ azurerm_network_interface_security_group_association.nicNSG ]
+  depends_on = [azurerm_network_interface_security_group_association.nicNSG]
 }
 
 # Gerar um inventario das VMs
