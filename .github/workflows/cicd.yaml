@@ -15,6 +15,9 @@ jobs:
       - name: Instalar Terraform
         uses: hashicorp/setup-terraform@v3
 
+      - name: Rodar Terraform Format
+        run: terraform fmt -check -diff
+
       - name: Rodar Init
         run: terraform init
 
