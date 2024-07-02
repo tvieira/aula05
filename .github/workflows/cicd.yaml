@@ -14,3 +14,9 @@ jobs:
 
       - name: Instalar Terraform
         uses: hashicorp/setup-terraform@v3
+
+      - name: Rodar Init
+        run: terraform init
+
+      - name: Criar um plano
+        run: terraform plan
