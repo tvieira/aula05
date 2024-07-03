@@ -5,7 +5,7 @@ on:
     branches: main
 
 jobs:
-  terraform:
+  lint:
     runs-on: ubuntu-latest
 
     steps:
@@ -21,6 +21,10 @@ jobs:
       - name: Rodar Linter
         uses: terraform-linters/setup-tflint@v1
 
+  security:
+    runs-on: ubuntu-latest
+
+    steps:
       - name: Run Checkov
         uses: bridgecrewio/checkov-action@master
         with:
@@ -31,6 +35,10 @@ jobs:
         with:
           soft_fail: true
 
+  terraform:
+    runs-on: ubuntu-latest
+
+    steps:
       - name: Rodar Init
         run: terraform init
         env:
