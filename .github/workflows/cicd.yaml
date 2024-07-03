@@ -26,6 +26,12 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Checkout do Codigo
+        uses: actions/checkout@v4
+
+      - name: Instalar Terraform
+        uses: hashicorp/setup-terraform@v3
+
       - name: Run Checkov
         uses: bridgecrewio/checkov-action@master
         with:
@@ -41,6 +47,12 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Checkout do Codigo
+        uses: actions/checkout@v4
+
+      - name: Instalar Terraform
+        uses: hashicorp/setup-terraform@v3
+
       - name: Rodar Init
         run: terraform init
         env:
@@ -51,6 +63,15 @@ jobs:
 
       - name: Criar um plano
         run: terraform plan
+        env:
+          ARM_CLIENT_ID: ${{ secrets.ARM_CLIENT_ID }}
+          ARM_SUBSCRIPTION_ID: ${{ secrets.ARM_SUBSCRIPTION_ID }}
+          ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
+          ARM_TENANT_ID: ${{ secrets.ARM_TENANT_ID }}
+
+      - name: Aplicar o plano
+        if: github.ref == 'refs/heads/main'
+        run: terraform apply -auto-approve
         env:
           ARM_CLIENT_ID: ${{ secrets.ARM_CLIENT_ID }}
           ARM_SUBSCRIPTION_ID: ${{ secrets.ARM_SUBSCRIPTION_ID }}
