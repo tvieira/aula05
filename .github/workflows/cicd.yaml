@@ -18,8 +18,14 @@ jobs:
       - name: Rodar Terraform Format
         run: terraform fmt -check -diff
 
-      - name: Rodar Terraform Format
+      - name: Rodar Linter
         uses: terraform-linters/setup-tflint@v1
+
+      - name: Run Checkov
+        uses: bridgecrewio/checkov-action@master
+
+      - name: Run tsec
+        uses: aquasecurity/tfsec-action@v1.0.0
 
       - name: Rodar Init
         run: terraform init
