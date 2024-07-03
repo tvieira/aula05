@@ -18,6 +18,9 @@ jobs:
       - name: Rodar Terraform Format
         run: terraform fmt -check -diff
 
+      - name: Rodar Terraform Format
+        uses: terraform-linters/setup-tflint@v1
+
       - name: Rodar Init
         run: terraform init
 
